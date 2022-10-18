@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assign 18 - Generators</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      // 1.
+      // Normal function has only one return statement.
+      //  generator function can use one or more yield statement.
+
+      // 2.
+      function* generateSequence() {
+        yield 1;
+        yield 2;
+        yield 3;
+      }
+
+      let generator = generateSequence();
+
+      for (let value of generator) {
+        console.log(value); // 1, then 2, then 3
+      }
+      // 3.ans- function generators are iterable.
+
+      // 4.
+      // generator function
+      function* generatorFunc(n) {
+        yield n;
+      }
+
+      // returns generator object
+      const generator1 = generatorFunc(100);
+      let result = generator1.next().value;
+      for (let i = 1; i <= 10; i++) {
+        console.log(result * i);
+      }
+
+      // 5.
+      function* nat() {
+        let i = 1;
+        while (true) {
+          yield i++;
+        }
+      }
+
+      for (let num of nat()) {
+        console.log(num);
+      }
+
+      //6.
+
+      function* generate() {
+        let result = yield "2 + 2 = ?"; // Error in this line
+      }
+
+      let generator2 = generate();
+
+      let question = generator2.next().value;
+
+      try {
+        generator2.throw(new Error("The answer is not found in my database"));
+      } catch (e) {
+        alert(e); // shows the error
+      }
+    </script>
+  </body>
+</html>
